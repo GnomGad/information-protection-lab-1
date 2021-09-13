@@ -1,51 +1,11 @@
 import sys
 from os import listdir, path
+from gronsfeld import Gronsfeld
 
-
-alphabet_default = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя -.,:!'
+alphabet_default = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-.,:!()#№'\"`"
 
 key = '2836'
 origin = 'Смаргл тут! Да прибудет вам счастье.'.lower()
-
-
-def shift(alp, symb, step):
-    """Вернуть string
-
-    Сделает необходимый сдвиг и вернет новый символ
-    """
-    new_index = alp.index(symb) + step
-    if new_index >= len(alp):
-        new_index -= len(alp)
-    return alp[new_index]
-
-
-def enumerate(alp, text, key, factor=1):
-    """Вернуть string
-
-    Сделает необходимый сдвиг и вернет новый символ
-    """
-    key_counter = 0
-    for i in text:
-        yield shift(alp, i, factor * int(key[key_counter]))
-        key_counter += 1
-        if key_counter == len(key):
-            key_counter = 0
-
-
-def encrypt(alp, text, key):
-    """Вернуть string
-
-    Вернет зашифрованные данные
-    """
-    return ''.join([i for i in enumerate(alp, text, key)])
-
-
-def decrypt(alp, text, key):
-    """Вернуть string
-
-    Вернет дешифрованные данные
-    """
-    return ''.join([i for i in enumerate(alp, text, key, -1)])
 
 
 def write_data(file_path, text):
@@ -113,4 +73,11 @@ if __name__ == "__main__":
 
     alp = get_alphabet(alp_path)
     text = get_file_data(file_name)
-    main(alp, action, text, key)
+    #main(alp, action, text, key)
+
+
+    a = Gronsfeld(key)
+
+    write_data('decrypted.txt',a.decrypt(text))
+    
+    
