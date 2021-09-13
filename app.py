@@ -84,19 +84,21 @@ def get_alphabet(file_name):
     return return_string
 
 
-def main(alp, action, text):
+def main(alp, action, text, key):
     current_alphabet = alp
     origin = text
     encrypted = ''
     decrypted = ''
     if(action == 'encrypt'):
         encrypted = encrypt(current_alphabet, text, key)
+        write_data('encrypted.txt',encrypted)
     elif action == 'decrypt':
         decrypted = decrypt(current_alphabet, text, key)
+        write_data('decrypted.txt',decrypted)
     else:
         encrypted = encrypt(current_alphabet, text, key)
-        decrypted = decrypt(current_alphabet, text, key)
-
+        decrypted = decrypt(current_alphabet, encrypted, key)
+    print('key:       {0}'.format(key))
     print('aplhabet:  {0}'.format(current_alphabet))
     print('origin:    {0}'.format(origin))
     print('encrypted: {0}'.format(encrypted))
@@ -107,7 +109,8 @@ if __name__ == "__main__":
     action = sys.argv[1]
     alp_path = sys.argv[2]
     file_name = sys.argv[3]
+    key = sys.argv[4]
 
     alp = get_alphabet(alp_path)
     text = get_file_data(file_name)
-    main(alp, action, text)
+    main(alp, action, text, key)
