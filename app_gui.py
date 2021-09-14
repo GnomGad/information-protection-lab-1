@@ -1,6 +1,7 @@
 import os
 import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import In
+from random import *
 
 from gronsfeld import Gronsfeld
 from app import get_file_data, write_data
@@ -18,7 +19,7 @@ layout = [
       sg.Text('Файл 2'), sg.InputText(key="-FOLDER_2-"), sg.FileBrowse(),sg.Button('Расшифровать', key='-DECRYPT-'), sg.InputText(key="-FOLDER_2_OUT-")
     ],
     [
-      sg.Text('Ключ цифровой'), sg.InputText(key="-KEY-",default_text='0')
+      sg.Text('Ключ цифровой'), sg.InputText(key="-KEY-",default_text='0'), sg.Button('Сгенерировать',key='-KEY_GENERATE-')
     ],
     [
       sg.Multiline(size=(88, 20), key='-OUT-')
@@ -44,6 +45,19 @@ while True:
     else:
         key_in = values['-KEY-']
     
+    if event == '-KEY_GENERATE-':
+        field = window.FindElement('-KEY-')
+        len_of_data = len(values['-OUT-'])
+        if len_of_data == 0:
+            if values['-FOLDER_1-'] != '':
+                len_of_data = len(get_file_data(values['-FOLDER_1-']))
+            elif values['-FOLDER_2-'] != '':
+                len_of_data = len(get_file_data(values['-FOLDER_2-']))
+            else :
+                continue
+        
+        field.Update(''.join([str(randint(0,9)) for i in range(len_of_data)]))
+
     if event == '-ENCRYPT-':
         file = values['-FOLDER_1-']
         key = key_in if key_in else '0'
