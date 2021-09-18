@@ -3,3 +3,4 @@ encrypted.txt
 decrypted.txt
 env
 *.txt
+__pycache__
