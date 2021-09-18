@@ -13,18 +13,19 @@ layout = [
       sg.Text("Приложения по защите информации лабараторная работа 1")
     ],
     [
-      sg.Text('Файл 1'), sg.InputText(key="-FOLDER_1-"), sg.FileBrowse(), sg.Button('Зашифровать', key='-ENCRYPT-'), sg.InputText(key="-FOLDER_1_OUT-")
+        sg.Button('Зашифровать  ', key='-ENCRYPT-'), sg.Text('откуда'), sg.InputText(key="-FOLDER_1-"), sg.FileBrowse(button_text="открыть"),
+        sg.Text('куда'),sg.InputText(key="-FOLDER_1_OUT-")
     ],
     [
-      sg.Text('Файл 2'), sg.InputText(key="-FOLDER_2-"), sg.FileBrowse(),sg.Button('Расшифровать', key='-DECRYPT-'), sg.InputText(key="-FOLDER_2_OUT-")
+        sg.Button('Расшифровать', key='-DECRYPT-'),sg.Text('откуда'), sg.InputText(key="-FOLDER_2-"), sg.FileBrowse(button_text="открыть"),
+        sg.Text('куда'), sg.InputText(key="-FOLDER_2_OUT-")
     ],
     [
       sg.Text('Ключ цифровой'), sg.InputText(key="-KEY-",default_text='0'), sg.Button('Сгенерировать',key='-KEY_GENERATE-')
     ],
     [
-      sg.Multiline(size=(88, 20), key='-OUT-')
-      ],
-    [sg.Submit(), sg.Cancel()]
+      sg.Multiline(size=(140, 20), key='-OUT-')
+    ],
 ]
 
 
@@ -84,7 +85,7 @@ while True:
         file = values['-FOLDER_2-']
         key = key_in if key_in else '0'
         decrypt_path = values['-FOLDER_2_OUT-']
-        decrypt_path = decrypt_path if len(decrypt_path) else 'decrypt.txtx'
+        decrypt_path = decrypt_path if len(decrypt_path) else 'decrypt.txt'
         gr = Gronsfeld(key)
 
         # Если есть путь то шифруем
