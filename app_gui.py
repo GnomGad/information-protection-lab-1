@@ -10,7 +10,7 @@ from app import get_file_data, write_data
 # Слои
 layout = [
     [
-      sg.Text("Приложения по защите информации лабараторная работа 1")
+      sg.Text("Приложения по защите информации \"Лабораторная работа 1\"")
     ],
     [
         sg.Button('Зашифровать  ', key='-ENCRYPT-'), sg.Text('откуда'), sg.InputText(key="-FOLDER_1-"), sg.FileBrowse(button_text="открыть"),
@@ -21,7 +21,8 @@ layout = [
         sg.Text('куда'), sg.InputText(key="-FOLDER_2_OUT-")
     ],
     [
-      sg.Text('Ключ цифровой'), sg.InputText(key="-KEY-",default_text='0'), sg.Button('Сгенерировать',key='-KEY_GENERATE-')
+      sg.Text('Ключ цифровой'), sg.InputText(key="-KEY-",default_text='0'), sg.Button('Сгенерировать',key='-KEY_GENERATE-'),
+      sg.Button('Очистить поле с текстом',key='-CLEAR-')
     ],
     [
       sg.Multiline(size=(140, 20), key='-OUT-')
@@ -102,6 +103,8 @@ while True:
 
         write_data(decrypt_path, decrypt)
         out.Update(decrypt)
-            
+
+    if event == '-CLEAR-':
+        out.Update('')
 
 window.close()

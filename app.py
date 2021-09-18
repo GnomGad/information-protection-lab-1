@@ -2,10 +2,11 @@ import sys
 from os import listdir, path
 from gronsfeld import Gronsfeld
 
-alphabet_default = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789-.,:!()#№'\"`"
+alphabet_default = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n[{(]}).,-_='\":#></№!?`*\\;"
 
 key = '2836'
 origin = 'Смаргл тут! Да прибудет вам счастье.'.lower()
+
 
 
 def write_data(file_path, text):
@@ -21,10 +22,16 @@ def get_file_data(file_path):
 
     Прочитать целиком файл по пути
     """
+
     data = ''
-    with open(file_path) as fp:
+    result =''
+    with open(file_path, 'rb') as fp:
         data = fp.read()
-    return data
+        for byte in data:
+            result += chr(byte)
+
+
+    return result
 
 
 def get_alphabet(file_name):

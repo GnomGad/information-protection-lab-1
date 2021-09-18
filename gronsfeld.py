@@ -3,7 +3,7 @@ class Gronsfeld:
 
     def __init__(self, key, alphabet=''):
         self.key = key
-        self.alphabet = alphabet if alphabet else "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789[]/>$`*\{\}-.,:!?()#№'\"`_=\n"
+        self.alphabet = alphabet if alphabet else "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n[{(]}).,-_='\":#></№!?`*\\"
 
     def encrypt(self, text):
         """Вернуть string
