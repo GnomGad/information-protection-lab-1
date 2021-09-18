@@ -1,39 +1,28 @@
 class Gronsfeld:
-    """Класс реализующий работу алгритма шифрования Гронсфельда"""
-
+    """Класс реализующий работу алгритма шифрования Гронсфельда."""
+    
     def __init__(self, key, alphabet=''):
+        """Принимает числовой ключ и алфавит."""
         self.key = key
         self.alphabet = alphabet if alphabet else "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n[{(]}).,-_='\":#></№!?`*\\"
 
     def encrypt(self, text):
-        """Вернуть string
-
-        Вернет зашифрованные данные
-        """
+        """Вернет зашифрованные данные."""
         return ''.join([i for i in self.enumerate(text)])
 
     def decrypt(self, text):
-        """Вернуть string
-
-        Вернет дешифрованные данные
-        """
+        """Вернет дешифрованные данные."""
         return ''.join([i for i in self.enumerate(text, -1)])
 
     def shift(self, symb, step):
-        """Вернуть string
-
-        Сделает необходимый сдвиг и вернет новый символ
-        """
+        """Сделает необходимый сдвиг и вернет новый символ."""
         new_index = self.alphabet.index(symb) + step
         if new_index >= len(self.alphabet):
             new_index -= len(self.alphabet)
         return self.alphabet[new_index]
 
     def enumerate(self, text, factor=1):
-        """Вернуть string
-
-        Сделает необходимый сдвиг и вернет новый символ
-        """
+        """Сделает необходимый сдвиг и вернет новый символ."""
         key_counter = 0
         for i in text:
             try:

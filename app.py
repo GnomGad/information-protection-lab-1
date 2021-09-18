@@ -1,5 +1,5 @@
 import sys
-from os import listdir, path
+from os import listdir
 from gronsfeld import Gronsfeld
 
 alphabet_default = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n[{(]}).,-_='\":#></№!?`*\\;"
@@ -9,19 +9,13 @@ origin = 'Смаргл тут! Да прибудет вам счастье.'.low
 
 
 def write_data(file_path, text):
-    """
-    Записать данные в файл
-    """
+    """Записать данные в файл."""
     with open(file_path, 'w') as fp:
         fp.write(text)
 
 
 def get_file_data(file_path):
-    """Return string
-
-    Прочитать целиком файл по пути
-    """
-
+    """Прочитать целиком файл по пути."""
     data = ''
     result = ''
     with open(file_path, 'rb') as fp:
@@ -33,11 +27,7 @@ def get_file_data(file_path):
 
 
 def get_alphabet(file_name):
-    """Вернуть string
-
-    Вернет строку алфавита,
-    """
-
+    """Вернет строку алфавита."""
     return_string = alphabet_default
     alphabets_files = listdir('./')
 
@@ -50,6 +40,7 @@ def get_alphabet(file_name):
 
 
 def main(alp, action, text, key):
+    """Выполнить весь скрипт действий."""
     current_alphabet = alp
     origin = text
     encrypted = ''

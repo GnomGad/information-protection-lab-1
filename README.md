@@ -1,5 +1,7 @@
 # information-protection-lab-1
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/be8747779f274a69a713426c2de6456d)](https://www.codacy.com/gh/GnomGad/information-protection-lab-1/dashboard?utm_source=github.com&utm_medium=referral&utm_content=GnomGad/information-protection-lab-1&utm_campaign=Badge_Grade)
+
 ```
 Вариант 7. Шифр Гронсфельда с числовым ключом
 
