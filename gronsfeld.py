@@ -12,7 +12,6 @@ class Gronsfeld:
         """
         return ''.join([i for i in self.enumerate(text)])
 
-
     def decrypt(self, text):
         """Вернуть string
 
@@ -30,8 +29,7 @@ class Gronsfeld:
             new_index -= len(self.alphabet)
         return self.alphabet[new_index]
 
-
-    def enumerate(self, text, factor = 1):
+    def enumerate(self, text, factor=1):
         """Вернуть string
 
         Сделает необходимый сдвиг и вернет новый символ
@@ -44,4 +42,5 @@ class Gronsfeld:
                 if key_counter == len(self.key):
                     key_counter = 0
             except:
-                print("В алфавите нету символа, он не будет использоваться {0} -> {1}".format(i,ord(i)))
+                print(
+                    "В алфавите нету символа, он не будет использоваться {0} -> {1}".format(i, ord(i)))

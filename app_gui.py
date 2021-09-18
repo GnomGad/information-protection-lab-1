@@ -10,22 +10,25 @@ from app import get_file_data, write_data
 # Слои
 layout = [
     [
-      sg.Text("Приложения по защите информации \"Лабораторная работа 1\"")
+        sg.Text("Приложения по защите информации \"Лабораторная работа 1\"")
     ],
     [
-        sg.Button('Зашифровать  ', key='-ENCRYPT-'), sg.Text('откуда'), sg.InputText(key="-FOLDER_1-"), sg.FileBrowse(button_text="открыть"),
-        sg.Text('куда'),sg.InputText(key="-FOLDER_1_OUT-")
+        sg.Button('Зашифровать  ', key='-ENCRYPT-'), sg.Text('откуда'), sg.InputText(
+            key="-FOLDER_1-"), sg.FileBrowse(button_text="открыть"),
+        sg.Text('куда'), sg.InputText(key="-FOLDER_1_OUT-")
     ],
     [
-        sg.Button('Расшифровать', key='-DECRYPT-'),sg.Text('откуда'), sg.InputText(key="-FOLDER_2-"), sg.FileBrowse(button_text="открыть"),
+        sg.Button('Расшифровать', key='-DECRYPT-'), sg.Text('откуда'), sg.InputText(
+            key="-FOLDER_2-"), sg.FileBrowse(button_text="открыть"),
         sg.Text('куда'), sg.InputText(key="-FOLDER_2_OUT-")
     ],
     [
-      sg.Text('Ключ цифровой'), sg.InputText(key="-KEY-",default_text='0'), sg.Button('Сгенерировать',key='-KEY_GENERATE-'),
-      sg.Button('Очистить поле с текстом',key='-CLEAR-')
+        sg.Text('Ключ цифровой'), sg.InputText(
+            key="-KEY-", default_text='0'), sg.Button('Сгенерировать', key='-KEY_GENERATE-'),
+        sg.Button('Очистить поле с текстом', key='-CLEAR-')
     ],
     [
-      sg.Multiline(size=(140, 20), key='-OUT-')
+        sg.Multiline(size=(140, 20), key='-OUT-')
     ],
 ]
 
@@ -42,11 +45,11 @@ while True:
 
     if event in (None, 'Exit', 'Cancel', sg.WIN_CLOSED):
         break
-    if values['-KEY-'] == None or len(values['-KEY-']) == 0 or  not values['-KEY-'].isdigit():
+    if values['-KEY-'] == None or len(values['-KEY-']) == 0 or not values['-KEY-'].isdigit():
         continue
     else:
         key_in = values['-KEY-']
-    
+
     if event == '-KEY_GENERATE-':
         field = window.FindElement('-KEY-')
         len_of_data = len(values['-OUT-'])
@@ -55,10 +58,10 @@ while True:
                 len_of_data = len(get_file_data(values['-FOLDER_1-']))
             elif values['-FOLDER_2-'] != '':
                 len_of_data = len(get_file_data(values['-FOLDER_2-']))
-            else :
+            else:
                 continue
-        
-        field.Update(''.join([str(randint(0,9)) for i in range(len_of_data)]))
+
+        field.Update(''.join([str(randint(0, 9)) for i in range(len_of_data)]))
 
     if event == '-ENCRYPT-':
         file = values['-FOLDER_1-']

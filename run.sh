@@ -1,1 +1,0 @@
-python app.py all alphabet_multi file.txt 2591823

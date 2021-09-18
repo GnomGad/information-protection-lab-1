@@ -8,7 +8,6 @@ key = '2836'
 origin = 'Смаргл тут! Да прибудет вам счастье.'.lower()
 
 
-
 def write_data(file_path, text):
     """
     Записать данные в файл
@@ -24,12 +23,11 @@ def get_file_data(file_path):
     """
 
     data = ''
-    result =''
+    result = ''
     with open(file_path, 'rb') as fp:
         data = fp.read()
         for byte in data:
             result += chr(byte)
-
 
     return result
 
@@ -58,10 +56,10 @@ def main(alp, action, text, key):
     decrypted = ''
     if(action == 'encrypt'):
         encrypted = encrypt(current_alphabet, text, key)
-        write_data('encrypted.txt',encrypted)
+        write_data('encrypted.txt', encrypted)
     elif action == 'decrypt':
         decrypted = decrypt(current_alphabet, text, key)
-        write_data('decrypted.txt',decrypted)
+        write_data('decrypted.txt', decrypted)
     else:
         encrypted = encrypt(current_alphabet, text, key)
         decrypted = decrypt(current_alphabet, encrypted, key)
@@ -82,9 +80,6 @@ if __name__ == "__main__":
     text = get_file_data(file_name)
     #main(alp, action, text, key)
 
-
     a = Gronsfeld(key)
 
-    write_data('decrypted.txt',a.decrypt(text))
-    
-    
+    write_data('decrypted.txt', a.decrypt(text))
