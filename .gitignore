@@ -1,6 +1,7 @@
 file.txt
 encrypted.txt
 decrypted.txt
+*.key
 env
 *.txt
 __pycache__
