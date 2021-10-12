@@ -41,10 +41,10 @@ def get_alphabet(file_name):
     return return_string
 
 
-def main(action, text, key, output, log = False):
+def main(action, text, key, output, log = False, alp = None, con = False):
     """Выполнить весь скрипт действий."""
     origin = text
-    a = Gronsfeld(key)
+    a = Gronsfeld(key,alp)
     write_data('key.key', key)
     #print('key',key)
     encrypted = ''
@@ -64,8 +64,9 @@ def main(action, text, key, output, log = False):
         print('origin:    {0}'.format(origin))
         print('encrypted: {0}'.format(encrypted))
         print('decrypted: {0}'.format(decrypted))
-
-    print('Выполнение программы закончено')
+    if con:
+        print(encrypted if encrypted else decrypted)
+    #print('Выполнение программы закончено')
 
 
 if __name__ == "__main__":
@@ -75,6 +76,8 @@ if __name__ == "__main__":
     parser.add_argument('-i', '--input', dest='input', help='Путь к файлу', required=True)
     parser.add_argument('-o', '--output', dest='output', help='Исходящий файл, если не указан будет создан автоматически', default='')
     parser.add_argument('-l', '--logs', dest='logs', action='store_true', default=False, help='Выводить ли лог')
+    parser.add_argument('--alp', dest='alphabet', help='путь к алфавиту', default=None)
+    parser.add_argument('-c', dest='console', help='вывод в консоль результата', default=False)
     args = parser.parse_args()
 
     start_time = time.time()
@@ -92,7 +95,7 @@ if __name__ == "__main__":
         key = get_file_data(args.key)
     else:
         key =  ''.join([str(random.randint(0, 9)) for i in range(len(text))])
-    
-    main(action, text, key, args.output, args.logs)
+    alp = get_file_data(args.alphabet) if args.alphabet and os.path.exists(args.alphabet) else None
+    main(action, text.lower(), key, args.output, args.logs, alp, args.console)
 
-    print('Время выполнения:',time.time() - start_time, 'секунд')
+    #print('Время выполнения:',time.time() - start_time, 'секунд')

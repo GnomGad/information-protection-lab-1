@@ -31,5 +31,6 @@ class Gronsfeld:
                 if key_counter == len(self.key):
                     key_counter = 0
             except:
-                print(
-                    "В алфавите нету символа, он не будет использоваться {0} -> {1}".format(i, ord(i)))
+                #print( "В алфавите нету символа, он будет использоваться как есть {0} -> {1}".format(i, ord(i)))
+                yield i
+                    
