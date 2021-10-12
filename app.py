@@ -1,4 +1,7 @@
+import argparse
+import random
 import sys
+
 from os import listdir
 from gronsfeld import Gronsfeld
 
@@ -8,7 +11,7 @@ key = '2836'
 origin = 'Смаргл тут! Да прибудет вам счастье.'.lower()
 
 
-def write_data(file_path, text):
+def write_data(file_path, text, encoding='utf-8'):
     """Записать данные в файл."""
     with open(file_path, 'w') as fp:
         fp.write(text)
@@ -17,13 +20,10 @@ def write_data(file_path, text):
 def get_file_data(file_path):
     """Прочитать целиком файл по пути."""
     data = ''
-    result = ''
-    with open(file_path, 'rb') as fp:
+    with open(file_path, 'r', encoding='utf-8') as fp:
         data = fp.read()
-        for byte in data:
-            result += chr(byte)
 
-    return result
+    return data
 
 
 def get_alphabet(file_name):
@@ -39,38 +39,50 @@ def get_alphabet(file_name):
     return return_string
 
 
-def main(alp, action, text, key):
+def main(action, text, key, output):
     """Выполнить весь скрипт действий."""
-    current_alphabet = alp
     origin = text
+    a = Gronsfeld(key)
     encrypted = ''
     decrypted = ''
     if(action == 'encrypt'):
-        encrypted = encrypt(current_alphabet, text, key)
+        encrypted = a.encrypt(text)
         write_data('encrypted.txt', encrypted)
     elif action == 'decrypt':
-        decrypted = decrypt(current_alphabet, text, key)
+        decrypted = a.decrypt(text)
         write_data('decrypted.txt', decrypted)
     else:
-        encrypted = encrypt(current_alphabet, text, key)
-        decrypted = decrypt(current_alphabet, encrypted, key)
+        encrypted = a.encrypt(text)
+        decrypted = a.decrypt(encrypted)
     print('key:       {0}'.format(key))
-    print('aplhabet:  {0}'.format(current_alphabet))
+    print('aplhabet:  {0}'.format(a.alphabet))
     print('origin:    {0}'.format(origin))
     print('encrypted: {0}'.format(encrypted))
     print('decrypted: {0}'.format(decrypted))
 
 
 if __name__ == "__main__":
-    action = sys.argv[1]
-    alp_path = sys.argv[2]
-    file_name = sys.argv[3]
-    key = sys.argv[4]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-a', '--action', dest='action', help='Тип действия Encrypt or decrypt', required=True)
+    parser.add_argument('-k', '--key', dest='key', help='Ключ для шифрования', default='')
+    parser.add_argument('-i', '--input', dest='input', help='Входящий файл', required=True)
+    parser.add_argument('-o', '--output', dest='output', help='Исходящий файл, если не указан будет создан автоматически out.txt', default='out.txt')
+    args = parser.parse_args()
 
-    alp = get_alphabet(alp_path)
-    text = get_file_data(file_name)
-    #main(alp, action, text, key)
+    print(args)
 
-    a = Gronsfeld(key)
+    # Тип действия
+    action = args.action.lower()
+    # Данные файла
+    text = get_file_data(args.input)
+    # Ключ для шифрования
+    key = args.key if args.key != '' else ''.join([str(random.randint(0, 9)) for i in range(len(text))])
+    print(key)
+    
+      #  alp_path = sys.argv[2]
 
-    write_data('decrypted.txt', a.decrypt(text))
+   # alp = get_alphabet(alp_path)
+    #
+    main(action, text, key, args.output)
+
+    #write_data('decrypted.txt', a.decrypt(text))

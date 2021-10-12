@@ -20,7 +20,26 @@
 
 ## Запуск
 
-`python app_gui.py`
+### Инициализация
+
+```ps
+python -m vnev env
+```
+```ps
+.\env\Scripts\Activate.ps1
+```
+```ps
+python -m pip install --upgrade pip
+```
+```ps
+pip install -r .\requirements.txt
+```
+
+
+### Запуск
+```ps
+python app_gui.py
+```
 
 <img src="./img/app_gui.png">
 
@@ -29,3 +48,8 @@
 Второе поле в каждой строке - это название файла которое будет сгенерированно
 
 Генерация работает только для данных из файла
+
+
+### Дополнительно
+
+Реализовать консольный интерфейс
