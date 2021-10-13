@@ -95,7 +95,8 @@ if __name__ == "__main__":
         key = get_file_data(args.key)
     else:
         key =  ''.join([str(random.randint(0, 9)) for i in range(len(text))])
+    #key = str(random.randint(1000,10000))
     alp = get_file_data(args.alphabet) if args.alphabet and os.path.exists(args.alphabet) else None
-    main(action, text.lower(), key, args.output, args.logs, alp, args.console)
+    main(action, text, key, args.output, args.logs, alp, args.console)
 
     #print('Время выполнения:',time.time() - start_time, 'секунд')

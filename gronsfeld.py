@@ -1,10 +1,16 @@
+from random import shuffle
+
+
 class Gronsfeld:
     """Класс реализующий работу алгритма шифрования Гронсфельда."""
     
     def __init__(self, key, alphabet=''):
         """Принимает числовой ключ и алфавит."""
+        alp_1 = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n[{(]}).,-_='\":#></№!?`*\\"
+        alp_2 = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        alp_3 = "1Дёoй9DсTJRэOиЗizYnКУЁЕwuЭ7ПdMМjgyKUИФIxхCЩо4пШfзщю56жБeQеЙbSGОXаpвЦьрNнcBНmЧLЛдыЪъ2ЬZТГЯкqaчWВ8я0цvЖPHбшFРмфAh3rСVkЮтуlEsгАЫХлt"
         self.key = key
-        self.alphabet = alphabet if alphabet else "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\n[{(]}).,-_='\":#></№!?`*\\"
+        self.alphabet = alphabet if alphabet else alp_3
 
     def encrypt(self, text):
         """Вернет зашифрованные данные."""
